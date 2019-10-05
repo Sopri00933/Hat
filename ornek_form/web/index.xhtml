@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body style="display:block; text-align:center; background-color: burlywood">
+        <h:form style="display:block; text-align:center;" id="kayit_formu">
+            <h:panelGrid columns="4">
+                
+                <h:outputText value="Adınız:"/>
+                <h:inputText required="true" requiredMessage="Lütfen Boş Bırakmayınız" value="#{d.isim}">
+                    <f:validateRequired/>
+                </h:inputText>
+                <h:outputText value="Soyadınız:"/>
+                <h:inputText value="#{d.soyisim}" required="true"/>
+                <h:outputText value="E-posta adresiniz:"/>
+                <h:inputText value="#{d.esposta}" required="true" validatorMessage="Geçersiz E-posta adresi!">
+                    <f:validateRegex pattern="^[_A-Za-z0-9-+\]+(.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$"/>
+                </h:inputText>
+                <h:outputText value="Sisteme giriş parolanız:"/>
+                <h:inputSecret value="#{d.parola}"  required="true" requiredMessage="Lütfen Boş Bırakmayınız" size="30" maxlength="8"/> 
+                
+            </h:panelGrid>
+            <h:panelGrid columns="4">
+                
+                <h:outputText value="Oturduğunuz ili seçiniz:"/>
+                <h:selectOneMenu value="#{d.il}">
+                    <f:selectItems value="#{d.illeridondur()}"/>
+                </h:selectOneMenu> 
+                <h:outputText value="Cinsiyetiniz:"/>
+                <h:selectOneRadio value="#{d.cinsiyet}">
+                    <f:selectItems value="#{d.cinsiyetleridondur()}"/>
+                </h:selectOneRadio>
+                <h:outputText value="LinkEdin hesabınız var mı?"/>
+                <h:selectOneRadio value="#{d.linkedinkullaniyormusunuz}">
+                        <f:selectItems value="#{d.hesapvarmidondur()}"/>
+                </h:selectOneRadio>
+                <h:outputText value="Tam adresinizi giriniz:"/>
+                <h:inputTextarea value="#{d.adres}" required="true"/>
+                
+            </h:panelGrid>
+            <h:panelGrid columns="1">
+                
+                <h:outputText value="Hobileriniz nelerdir?"/>
+                <h:selectManyCheckbox value="#{d.hobiler}">
+                    <f:selectItems value="#{d.hobilistesinidondur()}"/> 
+                </h:selectManyCheckbox>
+              
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                  
+                <h:outputText value="İngilizce bilginiz nedir?"/>
+                <h:selectOneRadio value="#{d.yabanci_dil_seviyesi}">
+                    <f:selectItems value="#{d.ydseviyeleridondur()}"/>
+                </h:selectOneRadio>
+               
+            </h:panelGrid>
+            <h:commandButton value="GÖNDER" action="gelen_veriler.xhtml"/>
+        </h:form>
+    </h:body>
+</html>
+
